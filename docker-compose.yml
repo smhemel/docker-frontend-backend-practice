@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile.backend
+        env_file:
+            - .env
+        ports:
+            - '5000:5000'
+
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile.frontend
+        ports:
+            - '3000:5173'
+
+    database:
+        image: postgres:13
+        environment:
+            POSTGRES_USER: user
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: ostad-test
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        networks:
+            - app-network
+
+    redis:
+        image: redis:6
+        volumes:
+            - redis_data:/data
+        networks:
+            - app-network
+
+volumes:
+    postgres_data:
+    redis_data:
+
+networks:
+    app-network:

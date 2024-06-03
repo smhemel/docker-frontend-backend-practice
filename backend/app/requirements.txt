@@ -1,0 +1,7 @@
+Flask
+Flask-SQLAlchemy
+Flask-Redis
+flask-cors
+requests
+psycopg2-binary
+pdfkit
